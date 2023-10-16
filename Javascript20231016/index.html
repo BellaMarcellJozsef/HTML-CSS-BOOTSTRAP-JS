@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -18,23 +19,23 @@
         document.write(c + "<br>");
 
         //Tömb:
-        var szamok = [1,7,22,6];
+        var szamok = [1, 7, 22, 6];
         var i;
-        for (i = 0; i < szamok.length; i++){
+        for (i = 0; i < szamok.length; i++) {
             document.write(szamok[i] + "<br>")
         }
 
         //Tömb elemek összege:
         var osszeg = 0;
-        for(i = 0; i < szamok.length; i++){
+        for (i = 0; i < szamok.length; i++) {
             szamok[i] += osszeg;
         }
         document.write("Tömb elemek összege:" + osszeg + "<br>");
 
         //Hány db 3-al osztható páros szám van?
         var parosHarom = 0;
-        for(i = 0; i < szamok.length; i++){
-            if(szamok[i] % 3 == 0 && szamok[i] % 2 == 0){
+        for (i = 0; i < szamok.length; i++) {
+            if (szamok[i] % 3 == 0 && szamok[i] % 2 == 0) {
                 parosHarom++;
             }
         }
@@ -43,8 +44,8 @@
         //Melyik a legnagyobb szám:
         var max;
         max = szamok[0];
-        for(i = 0; i< szamok.length; i++){
-            if(szamok[i] > max){
+        for (i = 0; i < szamok.length; i++) {
+            if (szamok[i] > max) {
                 max = szamok[i];
             }
         }
@@ -52,12 +53,18 @@
 
         //Beépített metódusok
         var most = new Date();
-        document.write(most);
+        document.write(most + "<br>");
+
+        document.write(most.getMonth() + "<br>");
+        document.write(most.getDay() + "<br>");
+        document.write(most.getDate() + "<br>");
 
     </script>
     <title>Document</title>
 </head>
+
 <body>
     <p>Szöveg a bodyban, egy bekezdésben.</p>
 </body>
+
 </html>
