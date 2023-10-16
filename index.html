@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        document.write("Ezt a javascript írta." + "<br>");
+        console.log("Kíírás a console-ra.");
+
+        var a = 23;
+        var b = 3.14;
+        var nev = "Liza";
+        var van = true;
+
+        //Műveletek:
+        var c = a + b
+        document.write(c + "<br>");
+
+        //Tömb:
+        var szamok = [1,7,22,6];
+        var i;
+        for (i = 0; i < szamok.length; i++){
+            document.write(szamok[i] + "<br>")
+        }
+
+        //Tömb elemek összege:
+        var osszeg = 0;
+        for(i = 0; i < szamok.length; i++){
+            szamok[i] += osszeg;
+        }
+        document.write("Tömb elemek összege:" + osszeg + "<br>");
+
+        //Hány db 3-al osztható páros szám van?
+        var parosHarom = 0;
+        for(i = 0; i < szamok.length; i++){
+            if(szamok[i] % 3 == 0 && szamok[i] % 2 == 0){
+                parosHarom++;
+            }
+        }
+        document.write("Hány db 3-al osztható páros szám van?" + "<br>" + parosHarom + "<br>");
+
+        //Melyik a legnagyobb szám:
+        var max;
+        max = szamok[0];
+        for(i = 0; i< szamok.length; i++){
+            if(szamok[i] > max){
+                max = szamok[i];
+            }
+        }
+        document.write("Legnagyobb szám: " + max + "<br>");
+
+    </script>
+    <title>Document</title>
+</head>
+<body>
+    <p>Szöveg a bodyban, egy bekezdésben.</p>
+</body>
+</html>
