@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <script language="Javascript">
+        function szamol() {
+            var a;
+            a = document.getElementById("a").value;
+            var b;
+            b = document.getElementById("b").value;
+            var c;
+            c = document.getElementById("c").value;
+
+            if ((a * a) + (b * b) == (c * c)) {
+                document.getElementById("p").innerHTML = "Ez egy derékszögű háromszög";
+            } else {
+                document.getElementById("p").innerHTML = "Ez nem egy derékszögű háromszög";
+            }
+        }
+    </script>
+    <title>Derékszögű háromszög</title>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Derékszögű-e a háromszög</h1>
+        <form action="">
+            <div class="form-group">
+                <label for="a">A háromszög a oldala:</label>
+                <input type="text" name="a" id="a" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="b">A háromszög b oldala:</label>
+                <input type="text" name="b" id="b" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="c">A háromszög c oldala:</label>
+                <input type="text" name="c" id="c" class="form-control">
+            </div>
+            <input type="button" value="Számol" class="btn btn-primary" onclick=szamol()>
+            <p id="p"></p>
+        </form>
+    </div>
+</body>
+
+</html>
