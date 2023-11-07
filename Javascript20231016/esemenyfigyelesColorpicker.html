@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Háttérszín</title>
+</head>
+<body>
+    <h1>Háttérszín beállítás:</h1>
+    <input type="color" id="choosenColor">
+    <script>
+        const colorpicker = document.getElementById('choosenColor');
+        colorpicker.addEventListener('input', change);
+        function change(){
+            document.body.style.backgroundColor = colorpicker.value;
+        }
+    </script>
+</body>
+</html>
