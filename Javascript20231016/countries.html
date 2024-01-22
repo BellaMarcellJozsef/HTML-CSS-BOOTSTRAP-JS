@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <title>Ország Információs Űrlap</title>
+    <style>
+        #country-form {
+            text-align: center;
+            padding: 20px;
+        }
+
+        #country-name {
+            margin-right: 10px;
+            padding: 5px;
+        }
+
+        #country-info {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div id="country-form">
+        <input type="text" id="country-name" placeholder="Ország neve">
+        <button id="getCountryInfo">Keresés</button>
+        <div id="country-info"></div>
+    </div>
+
+    <script>
+        document.getElementById("getCountryInfo").addEventListener("click", function() {
+            var countryName = document.getElementById("country-name").value;
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "https://restcountries.com/v3.1/name/" + countryName, true);
+
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    var response = JSON.parse(xhr.responseText);
+                    var country = response[0];
+                    var infoHTML = `
+                        <h2>${country.name.common}</h2>
+                        <p>Főváros: ${country.capital}</p>
+                        <p>Népesség: ${country.population.toLocaleString()}</p>
+                        <p>Pénznem: ${Object.values(country.currencies)[0].name}</p>
+                        <p>Zászló: <img src="${country.flags.png}" alt="Zászló" width="100px"></p>
+                    `;
+                    document.getElementById("country-info").innerHTML = infoHTML;
+                } else {
+                    document.getElementById("country-info").textContent = "Nem sikerült lekérni az ország információját.";
+                }
+            };
+
+            xhr.send();
+        });
+    </script>
+</body>
+</html>

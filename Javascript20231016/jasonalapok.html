@@ -4,25 +4,42 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Json</title>
+    <title>IP cím lekérés</title>
 </head>
 <body>
-    <p id="userdata"></p>
+    <form>
+        <label for="ip">IP cím:</label>
+        <input type="text" name="ipAddress" id="ipAddress">
+        <input type="button" id="getIpData" value="Keresés">
+        <p id="datas"></p>
+    </form>
     <script>
-            var apiUrl = 'https://jsonplaceholder.typicode.com/user/1';
+            var ip = document.getElementById('getIpData').addEventListener('click', function(){
+            var address = document.getElementById('ipAddress').value;
+            var apiUrl = 'http://ip-api.com/json/' + address;
 
             var xhr = new XMLHttpRequest();
             xhr.open('GET', apiUrl, true);
 
             xhr.onload = function(){
                 if(xhr.status === 200){
-                    var userdata = xhr.responseText;
-                    document.getElementById('userdata').textContent = userdata;
+                    var adr = JSON.parse(xhr.responseText);
+                    if(ValidateIPaddress(address) == true){
+                        document.getElementById('datas').textContent = adr.country;
+                    }
                 }else{
-                    document.getElementById('userdata').textContent = 'Nem sikerült lekérni az adatokat!';
+                    document.getElementById('datas').textContent = 'Nem sikerült lekérni az adatokat!';
                 }
             }
             xhr.send();
+        });
+        function ValidateIPaddress(ipaddress) {  
+                if (/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(ipaddress)) {  
+                    return (true)
+                }  
+                alert("You have entered an invalid IP address!")  
+                return (false)
+            }  
     </script>
 </body>
 </html>
