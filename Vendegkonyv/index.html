@@ -10,7 +10,7 @@
 <body>
     <form id="message-form">
         <h1>Vendégkönyv</h1>
-        <label for="nev">Név:</label>
+        <label for="nev">Név</label>
         <br>
         <input type="text" name="nev" id="nev">
         <br>
@@ -21,6 +21,7 @@
         <br>
         <br>
         <input type="submit" value="Üzenet elküldése" class="btn btn-primary">
+        <br>
     </form>
     <script src="https://www.gstatic.com/firebasejs/9.8.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.8.1/firebase-firestore-compat.js"></script>
@@ -47,6 +48,43 @@
                         uzenet: message
             })
         });
+    </script>
+    <form>
+        <br>
+        <h2>Üzenet szerkesztése</h2>
+        <br>
+        <label for="azonosito">Azonosító</label>
+        <br>
+        <input type="text" name="azonosito" id="azonosito">
+        <br>
+        <br>
+        <label for="nev">Név</label>
+        <br>
+        <input type="text" name="nev_frissites" id="nev_frissites">
+        <br>
+        <br>
+        <label for="uzenet">Üzenet</label>
+        <br>
+        <input type="text" name="uzenet_frissites" id="uzenet_frissites">
+        <br>
+        <br>
+        <input type="submit" value="Frissítés" class="btn btn-info" onclick="update()">
+        <input type="submit" value="Mégse" class="btn btn-secondary">
+    </form>
+    <script>
+        function update(){
+            if (docId) {
+                    const docRef = db.collection("vendegkonyv").doc(docId);
+                    docRef.update({
+                        nev: document.getElementById['nev_frissites'].value,
+                        uzenet: document.getElementById['uzenet_frissites'].value
+                    }).then(() => {
+                        console.log("Document updated with ID: ", docRef.id)
+                    }).catch(error => {
+                        console.error("Error updating document: ", error);
+                    });
+            }
+        }
     </script>
 </body>
 </html>
