@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TODO Lista</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="TODOList.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <form action="" id="submit">
+        <h2>TODO Lista</h2>
+        <div class="form-group">
+            <label>Tehendő:</label>
+            <input type="text" class="form-control" id="todo" placeholder="írd ide a tehedőt!">
+        </div>
+        <input type="submit" value="Küldés" class="btn btn-primary">
+        <input type="button" value="Fríssités" class="btn btn-primary" onclick="refresh()">
+
+    </form>
+
+    <form action="index.html" id="update">
+        <h2>Tehendő szerkesztése:</h2>
+        <div class="form-group">
+            <label> Azonosító </label>
+            <input type="text" class="form-control" id="docid" placeholder="Add meg az azonosítód">
+        </div>
+        <div class="form-group">
+            <label>Tehendő:</label>
+            <input type="text" class="form-control" id="todoRefresh" placeholder="írd ide a tehendőd">
+        </div>
+        <input type="button" value="Küldés" class="btn btn-primary" onclick="update()">
+
+        <input type="button" value="Törlés" class="btn btn-primary" onclick="cancel()">
+
+    </form>
+    <br>
+
+    <script type="text/html" id="appendTemplate">
+    <div>The div that should be appended</div>
+    </script>
+
+    <div id="appendableDiv"></div>
+    <script src="https://www.gstatic.com/firebasejs/9.8.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.8.1/firebase-firestore-compat.js"></script>
+
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyAxUjfdCuyG2O_5Nz9qHn8g0AvzWSKrTQw",
+            authDomain: "todolist-ab14c.firebaseapp.com",
+            projectId: "todolist-ab14c",
+            storageBucket: "todolist-ab14c.appspot.com",
+            messagingSenderId: "261452350895",
+            appId: "1:261452350895:web:7002cdedd979ce2065db5a"
+        };
+        const app = firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore(app);
+
+        document.getElementById('submit').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const check = false;
+            const todo = document.getElementById('todo').value;
+
+            db.collection("TODOList").add({
+                check: Check,
+                todo: TODO,
+            });
+
+        });
+
+        db.collection("TODOList").onSnapshot((querySnapshot) => {
+            const documents = querySnapshot.docs;
+
+            for (let i = 0; i < documents.length; i++) {
+                $("#appendableDiv").append("<div>" + '<input type="checkbox" value="'+documents[i].data().Check+'">' + " " + documents[i].data().TODO + "</div>" +
+                    '  <input type="button" value="Edit" class="btn btn-primary" onclick=edit("'+documents[i].id+'")>');
+
+            }
+
+
+        });
+
+        function update() {
+            var docId = document.getElementById("docid").value;
+
+            if (docId) {
+                const docRef = db.collection("TODOList").doc(docId);
+                docRef.update({
+                    TODO: todoRefresh.value
+                }).then(() => {
+                    console.log("Document updated with ID: ", docRef.id)
+                }).catch(error => {
+                    console.error("Error updating document: ", error);
+                });
+            }
+
+            document.getElementById('submit').addEventListener('submit', function (e) {
+            });
+        }
+
+
+        function refresh() {
+            location.reload();
+        }
+        function edit(ids) {
+            db.collection("TODOList").onSnapshot((querySnapshot) => {
+                const doc = querySnapshot.docs;
+                console.log(doc);
+                document.getElementById('docid').value = ids;
+            });
+        }
+        function cancel() {
+            document.getElementById("docid").value = "";
+            document.getElementById("todoRefresh").value = "";
+        }
+    </script>
+</body>
+
+</html>
